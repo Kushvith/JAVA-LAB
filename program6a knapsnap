@@ -1,0 +1,57 @@
+package com.company;
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main {
+   public void solve(int wt[],int val[],int w,int n){
+       int i,j;
+       int sol[][] = new int[n+1][w+1];
+       for (i=0;i<=n;i++){
+           for (j=0;j<=w;j++)
+           {
+               if(i==0||j==0)
+                   sol[i][j] = 0;
+               else if(wt[i]>j)
+                   sol[i][j] = sol[i-1][j];
+               else
+                sol[i][j] = Math.max((sol[i-1][j]),(sol[i-1][j-wt[i]]+val[i]));
+           }
+       }
+       System.out.println("the optimal solution is "+sol[n][w]);
+       int sel[] = new int[n+1];
+       for ( i = 1;i<n+1;i++)
+           sel[i] = 0;
+       i = n; j= w;
+       while(i>0&&j>0)
+       {
+           if(sol[i][j]!=sol[i-1][j])
+           {
+               sel[i] = 1;
+              j= j - wt[i];
+           }
+           i--;
+       }
+       for(i=1;i<n+1;i++){
+           if(sel[i]==1)
+               System.out.println(i+" \n");
+       }
+   }
+
+    public static void main(String[] args) {
+        Main ks = new Main();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter the number of elements");
+        int n = sc.nextInt();
+        int wt[] = new int[n+1];
+        int val[] = new int[n+1];
+        System.out.println("enter the weight of "+n+"elements");
+        for (int i = 1;i<=n;i++)
+            wt[i] = sc.nextInt();
+        System.out.println("enter the value of "+n+"elements");
+        for (int i = 1;i<=n;i++)
+            val[i] = sc.nextInt();
+        System.out.println("\nEnter the knapsack weight");
+        int w = sc.nextInt();
+        ks.solve(wt,val,w,n);
+    }
+}
