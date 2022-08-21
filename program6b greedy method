@@ -1,0 +1,46 @@
+package com.company;
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+      int i,j=0;
+      int max_qnty,m,n;
+      float sum=0,max;
+      Scanner sc = new Scanner(System.in);
+      int arr[][] = new int[2][20];
+        System.out.println("enter the number of items");
+        n = sc.nextInt();
+        System.out.println("enter the weight of each elements");
+        for(i=0;i<n;i++)
+            arr[0][i] = sc.nextInt();
+        System.out.println("enter the values of each elements");
+        for(i=0;i<n;i++)
+            arr[1][i] = sc.nextInt();
+        System.out.println("enter the maximun value of the knapsack");
+        max_qnty = sc.nextInt();
+        m = max_qnty;
+        while(m>=0){
+            max = 0;
+            for(i=0;i<n;i++)
+            {
+                if(((float)arr[1][i]/(float)arr[0][i] > max)) {
+                    max = ((float) arr[1][i] / (float) arr[0][i]);
+                    j=i;
+                }
+            }
+            if(arr[0][j] > m){
+                System.out.println("Quantity of item number: "+(j+1)+" added is "+m );
+                sum += m*max;
+                m=-1;
+            }
+            else{
+                System.out.println("quantity of item number is "+(j+1)+"is added "+arr[0][j]);
+                m -= arr[0][j];
+                sum += (float)arr[1][j];
+                arr[1][j] = 0;
+            }
+        }
+        System.out.println("the total profit is "+sum);
+    }
+}
