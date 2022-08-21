@@ -1,0 +1,54 @@
+
+package subset;
+import java.util.Scanner;
+import static java.lang.Math.pow;
+public class SubSet {
+    void subSet(int num,int n,int X[]){
+        int i;
+        for(i=1;i<=n;i++)
+            X[i]=0;
+        for(i=n;num!=0;i--)
+        {
+            X[i]=num%2;
+            num=num/2;
+        }
+    }
+    public static void main(String[]args){
+        int a[]=new int[10];
+        int X[]=new int[10];
+        int n,d,sum,present=0;
+        int j;
+        System.out.println("enter the number of elements of set");
+        Scanner sc=new Scanner(System.in);
+        n=sc.nextInt();
+        System.out.println("enter the elements of set");
+        for(int i=1;i<=n;i++)
+            a[i]=sc.nextInt();
+        System.out.println("enter the positive integer sum");
+        d=sc.nextInt();
+        if(d>0)
+        {
+            for(int i=1;i<=Math.pow(2,n)-1;i++)
+            {
+                SubSet s=new SubSet();
+            s.subSet(i,n,X);
+            sum=0;
+            for(j=1;j<=n;j++)
+                if(X[j]==1)
+                    sum=sum+a[j];
+            if(d==sum)
+            {
+                System.out.println("Subset={");
+                present=1;
+                for(j=1;j<=n;j++)
+                    if(X[j]==1)
+                        System.out.print(a[j]+",");
+                System.out.println("}="+d);
+                System.out.println();
+            }
+            }
+        }
+        if(present==0)
+            System.out.println("solution does not exits");
+}
+}
