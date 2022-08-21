@@ -1,0 +1,66 @@
+package com.company;
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main {
+    static int max = 2000;
+    int partition(int a[],int low,int high){
+        int p,i,j,temp;
+        p = a[low];
+        i = low+1;
+        j= high;
+        while(low<high){
+            while(a[i]<=p && i<high){  //checking from the first
+                // the ele is less pivoit
+                i++;
+            }
+           while(a[j]>p){ // checking from the last the
+               // ele is greater than piviot
+               j--;
+           }
+           if(i<j){
+               //swapping the elements after comparing
+               temp = a[i];
+               a[i] = a[j];
+               a[j] = temp;
+           }
+           else{
+               //swapping the elements for the pivot ele
+               temp = a[low];
+               a[i] = a[j];
+               a[j] = temp;
+               return j;
+           }
+        }
+        return j;
+    }
+    void sort(int a[],int low,int high){
+        if(low<high) {
+            // more than two elements
+            int s = partition(a,low,high);
+            sort(a,low,s-1);
+            sort(a,s+1,high);
+        }
+    }
+    public static void main(String[] args) {
+        int a[] = new int[20];
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the size of the array");
+        int n = sc.nextInt();
+        Random generator = new Random();
+        for(int i =0; i<n;i++)
+            a[i] = generator.nextInt(20);
+        System.out.println("elements before sorting ");
+        for (int i=0;i<n;i++)
+            System.out.println("the elements are " +i+" ");
+        Main quick = new Main();
+        long starttime = System.nanoTime();
+        quick.sort(a,0,n-1);
+        long endtime = System.nanoTime();
+        long timeelpased = endtime - starttime;
+        System.out.println("the time taken to sort array is "+ timeelpased+" ns");
+        System.out.println("sorted array is");
+        for(int i=0;i<n;i++)
+            System.out.println(i);
+    }
+}
