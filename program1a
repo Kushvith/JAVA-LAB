@@ -16,7 +16,7 @@ public class Main {
     }
 
     void displayRecord() {
-        System.out.println(USN + "" + Name + "" + branch + "" + phone);
+        System.out.println(USN + " " + Name + " " + branch + " " + phone);
     }
 
     public static void main(String[] args) {
