@@ -22,7 +22,7 @@ public class Main {
     public static void main(String[] args) {
         Main[] s = new Main[100];
         Scanner sc = new Scanner(System.in);
-        System.out.println("enterthenumberofstudents");
+        System.out.println("enter the number of students");
         int n = sc.nextInt();
         for (int i = 0; i < n; i++)
             s[i] = new Main();
